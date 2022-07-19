@@ -3,9 +3,9 @@
 - Take care all needed the persistent disk. 
 - write down your chart files and bash commands.
 
-Cloud platform: **Amazon Web Services (AWS)**.
-Region: **ap-southeast-1**.
-Enviroment: **Cloud9 IDE (EC2-t2.medium, Ubuntu Server 18.04 LTS)**.
+Cloud platform: **Amazon Web Services (AWS)**. <br>
+Region: **ap-southeast-1**. <br>
+Enviroment: **Cloud9 IDE (EC2-t2.medium, Ubuntu Server 18.04 LTS)**. <br>
 
 ## Procedures
 ### Setup development workspace
@@ -20,17 +20,16 @@ N/B: For teams and production use case, this is not recommended but since this i
     - Choose asianscloud-role from the IAM Role drop down, and select Save.
 3. Install [awscli2](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) in the Cloud9 environment
 4. Confirm the IAM role is functional in  Cloud9 enviroment by running
-
-`aws sts get-caller-identity`
+  `aws sts get-caller-identity`
 
 Output:
 
-```
-{
-    "UserId": "[A-Z0-9]:i-0a4e0c17587dc318d",
-    "Account": "</account-id>",
-    "Arn": "arn:aws:sts::</account-id>:assumed-role/asianscloud-role/i-0a4e0c17587dc318d"
-}
+  ```
+  {
+      "UserId": "[A-Z0-9]:i-0a4e0c17587dc318d",
+      "Account": "</account-id>",
+      "Arn": "arn:aws:sts::</account-id>:assumed-role/asianscloud-role/i-0a4e0c17587dc318d"
+  }
 ```
 
 5. Expand workspace block volume using the resize.sh:
