@@ -1,5 +1,7 @@
-# Task-1 Challenge: Use Helm Chart to install a postgresql database, take care about the persistent disk . write down your chart files and bash commands.
-<hr/>
+# Task-1 Challenge: 
+- Install a postgresql database with Helm Chart
+- Take care all needed the persistent disk. 
+- write down your chart files and bash commands.
 
 Cloud platform: **Amazon Web Services (AWS)**.
 Region: **ap-southeast-1**.
