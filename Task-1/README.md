@@ -1,21 +1,21 @@
 # Task-1 Challenge: Use Helm Chart to install a postgresql database, take care about the persistent disk . write down your chart files and bash commands.
 <hr/>
 
-Cloud platform: **Amazon Web Services (AWS)**
-Region: **ap-southeast-1**
-Enviroment: **Cloud9 IDE (EC2-t2.medium, Ubuntu Server 18.04 LTS)**
+Cloud platform: **Amazon Web Services (AWS)**.
+Region: **ap-southeast-1**.
+Enviroment: **Cloud9 IDE (EC2-t2.medium, Ubuntu Server 18.04 LTS)**.
 
 ## Procedures
 ### Setup development workspace
 1. Create an IAM role for EC2 service with AdministratorAdmin priviledges for Cloud9 environment:
-  - Navigate to IAM / Role / Create role.
-  - Select Trust Etity as EC2, then choose **AdministratorAdmin** policy and give the role a name **asianscloud**.
-  - Create role.
+    - Navigate to IAM / Role / Create role.
+    - Select Trust Etity as EC2, then choose **AdministratorAdmin** policy and give the role a name **asianscloud**.
+    - Create role.
 N/B: For teams and production use case, this is not recommended but since this is a solo project, it could be used.
 2. Attach the IAM role to Cloud9 EC2 instance: 
-  - In the Cloud9 environment, select the User icon with **R**
-  - Select the instance, then choose Actions / Security / Modify IAM Role.
-  - Choose asianscloud-role from the IAM Role drop down, and select Save.
+    - In the Cloud9 environment, select the User icon with **R**
+    - Select the instance, then choose Actions / Security / Modify IAM Role.
+    - Choose asianscloud-role from the IAM Role drop down, and select Save.
 3. Install [awscli2](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) in the Cloud9 environment
 4. Confirm the IAM role is functional in  Cloud9 enviroment by running
 
