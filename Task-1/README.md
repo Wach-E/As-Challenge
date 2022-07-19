@@ -32,7 +32,7 @@ Output:
   }
 ```
 
-5. Expand workspace block volume using the resize.sh:
+5. Expand workspace block volume using the **resize.sh**:
 
 ```
 export AWS_REGION=ap-southeast-1
@@ -40,30 +40,37 @@ chmod +x resize.sh
 ./resize.sh 30
 ```
 
+6. Update ubuntu system
+
+```
+sudo apt update
+```
+
 ### Setup Kubernetes cluster using Minikube
-1. Install Kubernetes
+1. Install Kubernetes using **k8s.sh**:
 
 ```
 chmod 700 k8s.sh
 ./k8s.sh
 ```
 
-2. Install Docker Engine
+2. Install Docker Engine using **docker.sh**:
 
 ```
 chmod 700 docker.sh
 ./docker.sh
 ```
 
-3. Create SSH Key for minikube (press Enter all through)
+3. Create SSH Key for minikube (press Enter all through): `ssh-keygen -f .ssh/id_rsa`
 
-  `ssh-keygen -f .ssh/id_rsa`
+4. Install conntrack for minikube: `sudo apt install conntrack -y`
+   - Connection tracking (“conntrack”) is used to keep track of all logical network connections or flows. It is essential for performant complex networking of Kubernetes where nodes need to track connection information between thousands of pods and services
 
-4. Install a dependency for minikube
+5. Install [cri-dockerd using this guide](https://www.mirantis.com/blog/how-to-install-cri-dockerd-and-migrate-nodes-from-dockershim)
 
-  `sudo apt install conntrack -y`
+6. Install [crictl (CLI and validation tools for kubelet container runtime interface (CRI) )](https://github.com/kubernetes-sigs/cri-tools#install-crictl)
 
-5. Install minikube
+7. Install minikube:
 
 ```
 curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
@@ -71,21 +78,50 @@ chmod +x minikube
 sudo mv minikube /usr/local/bin/
 ```
 
-<!--6. Start minikube-->
+8. Start minikube
 
-<!--`sudo minikube start --vm-driver=none`-->
-<!--N/B: We’re using -— vm-driver=none because minikube is running on a virtual machine. This approach defaults minikube to use docker as its driver.-->
+`sudo minikube start --vm-driver=none`
+N/B: We’re using -— vm-driver=none because minikube is running on a virtual machine. This approach defaults minikube to use docker as its driver.
 
-<!--7. Confirm the minikube cluster is ready by running this command:-->
+9. Confirm the minikube cluster is ready by running this command:
 
-<!--`sudo minikube status`-->
-<!--Your output should look like this, meaning that the cluster has been set up successfully.-->
+`sudo minikube status`
 
-<!--```-->
-<!--minikube-->
-<!--type: Control Plane-->
-<!--host: Running-->
-<!--kubelet: Running-->
-<!--apiserver: Running-->
-<!--kubeconfig: Configured-->
-<!--```-->
+Your output should look like this, meaning that the cluster has been set up successfully.
+
+```
+minikube
+type: Control Plane
+host: Running
+kubelet: Running
+apiserver: Running
+kubeconfig: Configured
+```
+
+10. Make ubuntu user the owner of the cluster:
+
+```
+sudo chown -R $USER $HOME/.minikube
+sudo chmod -R u+wrx $HOME/.minikube
+```
+
+11. Make ubuntu user the owner of kubernetes:
+
+```
+sudo chown $USER $HOME/.kube/
+sudo chmod 600 $HOME/.kube/config
+```
+
+12. Update the kube config with the current loaction of minikube: `sudo sed -i "s|/root|$HOME|g" $HOME/.kube/config`
+
+13. Confirm the changes worked: `kubectl get svc`
+
+Output:
+```
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   39m
+```
+
+### Setup Helm Chart
+
+### Create Helm Chart to deploy postgresql database
