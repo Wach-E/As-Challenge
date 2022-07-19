@@ -19,8 +19,8 @@ N/B: For teams and production use case, this is not recommended but since this i
     - Select the instance, then choose Actions / Security / Modify IAM Role.
     - Choose asianscloud-role from the IAM Role drop down, and select Save.
 3. Install [awscli2](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) in the Cloud9 environment
-4. Confirm the IAM role is functional in  Cloud9 enviroment by running
-  `aws sts get-caller-identity`
+4. Confirm the IAM role is functional in  Cloud9 enviroment by running:
+    `aws sts get-caller-identity`
 
 Output:
 
@@ -57,11 +57,11 @@ chmod 700 docker.sh
 
 3. Create SSH Key for minikube (press Enter all through)
 
-`ssh-keygen -f .ssh/id_rsa`
+  `ssh-keygen -f .ssh/id_rsa`
 
 4. Install a dependency for minikube
 
-`sudo apt install conntrack -y`
+  `sudo apt install conntrack -y`
 
 5. Install minikube
 
