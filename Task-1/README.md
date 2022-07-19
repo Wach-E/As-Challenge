@@ -40,11 +40,10 @@ chmod +x resize.sh
 ./resize.sh 30
 ```
 
-6. Update ubuntu system
+6. Update ubuntu system: <br>
 
-```
-sudo apt update
-```
+`sudo apt update`
+
 
 ### Setup Kubernetes cluster using Minikube
 1. Install Kubernetes using **k8s.sh**:
@@ -78,14 +77,10 @@ chmod +x minikube
 sudo mv minikube /usr/local/bin/
 ```
 
-8. Start minikube
-
-`sudo minikube start --vm-driver=none`
+8. Start minikube: `sudo minikube start --vm-driver=none` <br>
 N/B: We’re using -— vm-driver=none because minikube is running on a virtual machine. This approach defaults minikube to use docker as its driver.
 
-9. Confirm the minikube cluster is ready by running this command:
-
-`sudo minikube status`
+9. Confirm the minikube cluster is ready by running this command: `sudo minikube status` <br>
 
 Your output should look like this, meaning that the cluster has been set up successfully.
 
@@ -122,6 +117,18 @@ NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
 kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   39m
 ```
 
-### Setup Helm Chart
-
 ### Create Helm Chart to deploy postgresql database
+
+1. Install Helm 3 using script:
+```
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+helm version
+```
+
+2. Create helm chart postgresql-db: `helm create postgresql-db`
+
+3. Navigate to `postgresql-db` and modify **Chart.yaml**.
+
+4. 
