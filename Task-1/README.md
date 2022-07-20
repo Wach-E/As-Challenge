@@ -1,7 +1,7 @@
 # Task-1 Challenge: 
 - Install a postgresql database with Helm Chart
-- Take care all needed the persistent disk. 
-- write down your chart files and bash commands.
+- Take care of all the needed persistent disk. 
+- Document your chart files and bash commands.
 
 Cloud platform: **Amazon Web Services (AWS)**. <br>
 Region: **ap-southeast-1**. <br>
@@ -116,6 +116,8 @@ Output:
 NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
 kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   39m
 ```
+
+
 
 ### Create Helm Chart to deploy postgresql database
 
