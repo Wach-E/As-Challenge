@@ -1,0 +1,38 @@
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: vault-database
+  namespace: postgres
+spec:
+  provider: vault
+  secretObjects:
+    - secretName: db-cred
+      type: Opaque
+      data:
+        - key: POSTGRES_USER
+          objectName: POSTGRES_USER
+        - key: POSTGRES_PASSWORD
+          objectName: POSTGRES_PASSWORD
+        - key: POSTGRES_DB
+          objectName: POSTGRES_DB
+    
+  parameters:
+    vaultAddress: "http://vault.postgres:8200"
+    roleName: "postgres-app"
+    objects: |
+      array:
+        - |
+          objectName: "POSTGRES_USER"
+          objectType: secret
+          secretPath: "internal/database/config"
+          secretKey: "POSTGRES_USER"
+        - |
+          objectName: "POSTGRES_PASSWORD"
+          objectType: secret
+          secretPath: "internal/database/config"
+          secretKey: "POSTGRES_PASSWORD"
+        - |
+          objectName: "POSTGRES_DB"
+          objectType: secret
+          secretPath: "internal/database/config"
+          secretKey: "POSTGRES_DB"

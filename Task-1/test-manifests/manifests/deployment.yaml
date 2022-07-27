@@ -29,9 +29,29 @@ spec:
       containers:
         - name: postgres-db
           image: postgres:14-alpine
-          command: ["/bin/bash", "-c"]
-          args:
-            ['source /vault/secrets/database-config && env > /vault/secrets/db && tail -f /dev/null']
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-cred
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-cred
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: db-cred
+                  key: POSTGRES_DB
+          volumeMounts:
+          - name: secrets-store-inline
+            mountPath: "/mnt/secrets-store"
+            readOnly: true
+          # command: ["/bin/bash", "-c"]
+          # args:
+          #   ['source /vault/secrets/database-config && env > /vault/secrets/db && tail -f /dev/null']
           imagePullPolicy: "Always"
           ports:
             - name: postgres-port
@@ -43,3 +63,9 @@ spec:
         - name: postgresdb
           persistentVolumeClaim:
             claimName: postgres-pvc
+        - name: secrets-store-inline
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "vault-database"
