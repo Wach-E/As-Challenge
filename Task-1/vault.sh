@@ -72,3 +72,5 @@ helm repo add secrets-store-csi-driver https://kubernetes-sigs.github.io/secrets
 helm repo update
 helm install csi secrets-store-csi-driver/secrets-store-csi-driver \
   --set syncSecret.enabled=true -n postgres
+  
+# Create spc-vault-db
