@@ -79,6 +79,7 @@ sudo mv minikube /usr/local/bin/
 
 8. Start minikube: `sudo minikube start --vm-driver=none` <br>
 N/B: We’re using -— vm-driver=none because minikube is running on a virtual machine. This approach defaults minikube to use docker as its driver.
+An alternative to the above command is `minikube start --driver=docker`
 
 9. Confirm the minikube cluster is ready by running this command: `sudo minikube status` <br>
 
